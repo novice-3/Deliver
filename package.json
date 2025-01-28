@@ -1,8 +1,8 @@
 {
   "name": "admincon",
+  "homepage": "https://novice-3.github.io/Deliver.git",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://novice-3.github.io/Deliver",
   "dependencies": {
     "cra-template": "1.2.0",
     "firebase": "^11.2.0",
@@ -15,8 +15,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
