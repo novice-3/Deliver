@@ -107,9 +107,6 @@ const trStyle = {
   cursor: 'pointer',
 };
 
-// Responsive table wrapper for scroll on smaller screens
-const tableWrapper = {
-  overflowX: 'auto',
-};
+
 
 export default Pending;
