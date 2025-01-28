@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { db } from '../firebase';
-import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase'; // Make sure your Firebase is set up correctly
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 function HistoryPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -12,7 +12,29 @@ function HistoryPage() {
       alert('Please enter a phone number');
       return;
     }
-    // ... (Existing search logic remains unchanged)
+
+    try {
+      // Reference to the collection 'orders' (adjust if needed)
+      const ordersRef = collection(db, 'orders');
+      const q = query(ordersRef, where('phoneNumber', '==', phoneNumber)); // Adjust field name if needed
+
+      const querySnapshot = await getDocs(q);
+      const fetchedOrders = [];
+      querySnapshot.forEach((doc) => {
+        fetchedOrders.push({ ...doc.data(), orderId: doc.id }); // Assuming 'doc.id' is your order ID
+      });
+
+      if (fetchedOrders.length === 0) {
+        setError('No orders found for this phone number');
+      } else {
+        setError('');
+      }
+
+      setOrders(fetchedOrders); // Set the fetched orders into state
+    } catch (error) {
+      setError('Error fetching orders');
+      console.error('Error fetching orders: ', error);
+    }
   };
 
   return (
